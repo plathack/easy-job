@@ -19,4 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/vacancies', [VacancyController::class, 'index']);
+Route::controller(VacancyController::class)->group(function() {
+    Route::get('/vacancies', 'store');
+    Route::get('/vacancy', 'index');
+    Route::post('/vacancy', 'create');
+    Route::put('/vacancy', 'update');
+    Route::delete('/vacancy', 'delete');
+});
