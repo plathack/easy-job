@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\VacancyResource;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
@@ -9,12 +10,12 @@ class VacancyController extends Controller
 {
     public function store()
     {
-        return Vacancy::all();
+        return new VacancyResource(Vacancy::all());
     }
 
     public function index(Request $request)
     {
-        return Vacancy::where('id', $request['id'])->get();
+        return new VacancyResource(Vacancy::where('id', $request['id'])->get());
     }
 
     public function create(Request $request)
